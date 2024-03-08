@@ -1,4 +1,5 @@
-import app from './app.js'
+const app = require('./app.js');
 
-app.listen(3000)
-console.log('Server on port', 3000)
+app.listen(app.get('port'), () =>{
+    console.log("Servidor en el puerto", app.get("port"));
+})

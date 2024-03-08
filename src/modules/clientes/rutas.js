@@ -6,7 +6,7 @@ const controlador = require('./controlador');
 const router = express.Router();
 
 router.get('/', async function (req, res){
-    const items = await controlador.usuarios()
+    const items = await controlador.clientes()
     .then((items) => {
         respuesta.sucess(req, res, items, 200)
     })

@@ -37,7 +37,7 @@ function conexionSQL(){
 
 conexionSQL();
 
-function usuarios(tabla){
+function clientes(tabla){
     return new Promise((resolve, rejects) => {
         conexion.query(`SELECT * FROM ${tabla}`, (error, result) =>{
             if(error) return rejects(error);
@@ -75,7 +75,7 @@ function untablero(tabla, id){
 
 
 module.exports = {
-    usuarios,
+    clientes,
     uno,
     tableros,
     untablero

@@ -1,17 +1,17 @@
 const db = require('../../DB/mysql');
 
-const USUARIOS = 'usuarios';
+const CLIENTES = 'clientes';
 
-function usuarios (){
-    return db.usuarios(USUARIOS);
+function clientes (){
+    return db.clientes(CLIENTES);
 }
 
 function uno (id){
-    return db.uno(USUARIOS, id);
+    return db.uno(CLIENTES, id);
 }
 
 
 module.exports = {
-    usuarios,
+    clientes,
     uno,
 }

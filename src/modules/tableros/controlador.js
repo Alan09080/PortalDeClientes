@@ -3,7 +3,7 @@ const db = require('../../DB/mysql');
 const TABLEROS = 'tableros';
 
 function tableros (){
-    return db.usuarios(TABLEROS);
+    return db.tableros(TABLEROS);
 }
 
 function untablero (id){

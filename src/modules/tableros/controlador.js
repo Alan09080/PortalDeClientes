@@ -1,16 +1,22 @@
-const db = require('../../DB/mysql');
-
 const TABLEROS = 'tableros';
 
-function tableros (){
-    return db.tableros(TABLEROS);
-}
+module.exports = function (dbinyectada) {
 
-function untablero (id){
-    return db.uno(TABLEROS, id);
-}
+    let db = dbinyectada
+    if(!db){
+        db = require('../../DB/mysql');
+    }
 
-module.exports = {
-    tableros,
-    untablero,
+    function tableros (){
+        return db.tableros(TABLEROS);
+    }
+    
+    function untablero (id){
+        return db.uno(TABLEROS, id);
+    }
+
+    return{
+        tableros,
+        untablero,
+    }
 }

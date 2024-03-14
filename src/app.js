@@ -10,13 +10,16 @@ const app = express();
 
 //middlware
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //configuración
-app.set('port', config.app.port)
+app.set('port', config.app.port);
 
 //rutas
 app.use('/api/clientes', clientes);
 app.use('/api/tableros', tableros);
+
 app.use(error);
 
 module.exports = app;

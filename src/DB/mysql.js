@@ -40,8 +40,7 @@ conexionSQL();
 function clientes(tabla){
     return new Promise((resolve, rejects) => {
         conexion.query(`SELECT * FROM ${tabla}`, (error, result) =>{
-            if(error) return rejects(error);
-            resolve(result);
+            return error ?  rejects(error) : resolve(result);
         })
     });
 }
@@ -49,17 +48,33 @@ function clientes(tabla){
 function uno(tabla, id){
     return new Promise((resolve, rejects) => {
         conexion.query(`SELECT * FROM ${tabla} WHERE id=${id}`, (error, result) =>{
-            if(error) return rejects(error);
-            resolve(result);
+            return error ? rejects(error) : resolve(result);
         })
     });
 }
 
+function agregar(tabla, data){
+    return new Promise((resolve, rejects) => {
+        conexion.query(`INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ?`,[data, data], (error, result) =>{
+            return error ? rejects(error) : resolve(result);
+        })
+    });
+}
+
+
+function eliminar(tabla, data){
+    return new Promise((resolve, rejects) => {
+        conexion.query(`DELETE FROM ${tabla} WHERE id= ?`, data.id, (error, result) =>{
+            return error ? rejects(error) : resolve(result);
+        })
+    });
+}
+
+
 function tableros(tabla){
     return new Promise((resolve, rejects) => {
         conexion.query(`SELECT * FROM ${tabla}`, (error, result) =>{
-            if(error) return rejects(error);
-            resolve(result);
+            return error ? rejects(error) : resolve(result);
         })
     });
 }
@@ -67,8 +82,7 @@ function tableros(tabla){
 function untablero(tabla, id){
     return new Promise((resolve, rejects) => {
         conexion.query(`SELECT * FROM ${tabla} WHERE id=${id}`, (error, result) =>{
-            if(error) return rejects(error);
-            resolve(result);
+            return error ? rejects(error) : resolve(result);
         })
     });
 }
@@ -78,5 +92,7 @@ module.exports = {
     clientes,
     uno,
     tableros,
-    untablero
+    untablero,
+    eliminar,
+    agregar,
 }

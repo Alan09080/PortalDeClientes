@@ -18,13 +18,13 @@ module.exports = function (dbinyectada){
     }
     
     async function agregar (body){
-        const usuario = {
+        const correo = {
             id: body.id,
-            correo: body.correo,
+            usuario: body.usuario,
             id_tablero: body.id_tablero
         }
 
-        const respuesta = await db.agregar(TABLA, usuario);
+        const respuesta = await db.agregar(TABLA, correo);
 
         var insertId = 0;
         if(body.id == 0){
@@ -34,10 +34,10 @@ module.exports = function (dbinyectada){
         }
 
         var respuesta2 = '';
-        if(body.usuario || body.password){
+        if(body.correo || body.password){
             respuesta2 = await auth.agregar({
                 id: insertId,
-                usuario: body.usuario,
+                correo: body.correo,
                 password: body.password,
             })
         }

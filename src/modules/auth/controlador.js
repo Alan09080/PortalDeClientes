@@ -10,8 +10,8 @@ module.exports = function (dbinyectada){
         db = require('../../DB/mysql');
     }
 
-    async function login(usuario, password){
-        const data = await db.query(TABLA, {usuario: usuario})
+    async function login(correo, password){
+        const data = await db.query(TABLA, {correo: correo})
 
         return bcrypt.compare(password, data.password)
             .then(resultado => {
@@ -30,8 +30,8 @@ module.exports = function (dbinyectada){
             id: data.id,
         }
 
-        if(data.usuario){
-            authData.usuario = data.usuario
+        if(data.correo){
+            authData.correo = data.correo
         }
 
         if(data.password){

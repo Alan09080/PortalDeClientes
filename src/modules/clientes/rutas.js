@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', clientes);
 router.get('/:id', uno);
 router.put('/',seguridad(), eliminar);
-router.post('/', seguridad(),agregar);
+router.post('/',agregar);
 
 
 

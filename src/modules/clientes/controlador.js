@@ -1,4 +1,4 @@
-const CLIENTES = 'clientes';
+const TABLA = 'clientes';
 const auth = require('../auth')
 
 module.exports = function (dbinyectada){
@@ -10,11 +10,11 @@ module.exports = function (dbinyectada){
     }
 
     function clientes (){
-        return db.clientes(CLIENTES);
+        return db.clientes(TABLA);
     }
     
     function uno (id){
-        return db.uno(CLIENTES, id);
+        return db.uno(TABLA, id);
     }
     
     async function agregar (body){
@@ -24,30 +24,31 @@ module.exports = function (dbinyectada){
             id_tablero: body.id_tablero
         }
 
-        const respuesta = await db.agregar(CLIENTES, usuario);
+        const respuesta = await db.agregar(TABLA, usuario);
 
-        var insertID = 0;
+        var insertId = 0;
         if(body.id == 0){
-            insertID = respuesta.insertID;
+            insertId = respuesta.insertId;
         }else{
-            insertID = body.id;
+            insertId = body.id;
         }
 
-        if(body.usuario || body.pass){
-            await auth.agregar({
-                id: insertID,
+        var respuesta2 = '';
+        if(body.usuario || body.password){
+            respuesta2 = await auth.agregar({
+                id: insertId,
                 usuario: body.usuario,
-                pass: body.usuario
+                password: body.password,
             })
         }
 
-        return 
+        return respuesta2;
     }
 
 
     
     function eliminar (body){
-        return db.eliminar(CLIENTES, body);
+        return db.eliminar(TABLA, body);
     }
 
     return {

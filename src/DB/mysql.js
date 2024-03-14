@@ -55,7 +55,7 @@ function uno(tabla, id){
 
 function agregar(tabla, data){
     return new Promise((resolve, rejects) => {
-        conexion.query(`INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ?`,[data, data], (error, result) =>{
+        conexion.query(`INSERT INTO ${tabla} SET ? ON DUPLICATE KEY UPDATE ?`, [data, data], (error, result) =>{
             return error ? rejects(error) : resolve(result);
         })
     });
@@ -70,6 +70,13 @@ function eliminar(tabla, data){
     });
 }
 
+function query(tabla, consulta){
+    return new Promise((resolve, rejects) => {
+        conexion.query(`SELECT * FROM ${tabla} WHERE ?`, consulta, (error, result) =>{
+            return error ? rejects(error) : resolve(result[0]);
+        })
+    });
+}
 
 function tableros(tabla){
     return new Promise((resolve, rejects) => {
@@ -95,4 +102,5 @@ module.exports = {
     untablero,
     eliminar,
     agregar,
+    query,
 }
